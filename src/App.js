@@ -22,16 +22,16 @@ function App() {
 	return <Router basename={process.env.REACT_APP_BASENAME}>
 		<header id="header">
 			<nav>
-				<h1>Admin</h1>
+				<h1>管理员控制台</h1>
 				<ul>
-					<li><NavLink exact to="/">Status</NavLink></li>
-					<li><NavLink to="/settings/">Settings</NavLink></li>
-					<li><NavLink to="/listservers/">List servers</NavLink></li>
-					<li><NavLink to="/sessions/">Sessions</NavLink></li>
-					<li><NavLink to="/users/">Users</NavLink></li>
-					<li><NavLink to="/bans/">Bans</NavLink></li>
-					<li><NavLink to="/accounts/">Accounts</NavLink></li>
-					<li><NavLink to="/logs/">Logs</NavLink></li>
+					<li><NavLink exact to="/">状态</NavLink></li>
+					<li><NavLink to="/settings/">服务器设置</NavLink></li>
+					<li><NavLink to="/listservers/">列表白名单</NavLink></li>
+					<li><NavLink to="/sessions/">会话列表</NavLink></li>
+					<li><NavLink to="/users/">用户列表</NavLink></li>
+					<li><NavLink to="/bans/">封禁记录</NavLink></li>
+					<li><NavLink to="/accounts/">账号管理</NavLink></li>
+					<li><NavLink to="/logs/">服务器日志</NavLink></li>
 				</ul>
 			</nav>
 		</header>

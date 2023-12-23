@@ -101,74 +101,74 @@ export default class extends React.Component {
 			const extAuthAvailable = settings['extauth'] !== undefined;
 
 			inputGrid = <InputGrid>
-				<Caption>Server</Caption>
+				<Caption>服务器</Caption>
 
-				<Field label="Server title">
+				<Field label="服务器名称">
 					<TextInput long {...vprops('serverTitle')} />
 				</Field>
-				<Field label="Connection timeout">
+				<Field label="连接超时时间(unlimited为无限制)">
 					<TextInput {...vprops('clientTimeout')} />
 				</Field>
-				<Field label="Log retention">
+				<Field label="日志保留时间(forever为永久)">
 					<TextInput {...vprops('logpurgedays')} />
 				</Field>
 				<Field>
-					<CheckboxInput label="Allow unauthenticated users" {...vprops('allowGuests')} />
-					<CheckboxInput label="Allow anyone to host" {...vprops('allowGuestHosts')} />
+					<CheckboxInput label="允许游客用户" {...vprops('allowGuests')} />
+					<CheckboxInput label="允许任何人建立会话" {...vprops('allowGuestHosts')} />
 				</Field>
 
-				<Caption>Session</Caption>
-				<Field label="Welcome message">
+				<Caption>会话</Caption>
+				<Field label="欢迎语">
 					<TextInput long {...vprops('welcomeMessage')} />
 				</Field>
-				<Field label="Size limit">
+				<Field label="会话大小限制">
 					<TextInput {...vprops('sessionSizeLimit')} />
 				</Field>
-				<Field label="Default autoreset threshold">
+				<Field label="默认自动重置阈值">
 					<TextInput {...vprops('autoResetThreshold')} />
 				</Field>
-				<Field label="Max simultaneous">
+				<Field label="最大会话数量">
 					<TextInput {...vprops('sessionCountLimit')} />
 				</Field>
-				<Field label="Idle time limit">
+				<Field label="会话空闲超时(unlimited为无限制)">
 					<TextInput {...vprops('idleTimeLimit')} />
 				</Field>
 				<Field>
-					<CheckboxInput label="Allow sessions to persist without users" {...vprops('persistence')} />
-					<CheckboxInput label="Archive terminated sessions" {...vprops('archive')} />
-					<CheckboxInput label="Do not include user list in session announcements" {...vprops('privateUserList')} />
-					<CheckboxInput label="Allow custom avatars" {...vprops('customAvatars')} />
+					<CheckboxInput label="允许会话在没有用户的情况下持续存在" {...vprops('persistence')} />
+					<CheckboxInput label="存档已终止的会话" {...vprops('archive')} />
+					<CheckboxInput label="会话公告中不包括已登录用户的列表" {...vprops('privateUserList')} />
+					<CheckboxInput label="允许用户使用自定义头像" {...vprops('customAvatars')} />
 				</Field>
 
-				<Caption>Abuse reporting</Caption>
+				<Caption>滥用报告</Caption>
 				<Field>
-					<CheckboxInput label="Enable" enabled={abuseReportAvailable} {...vprops('abusereport')} />
+					<CheckboxInput label="开启" enabled={abuseReportAvailable} {...vprops('abusereport')} />
 				</Field>
 				<Field label="Auth token">
 					<TextInput long enabled={abuseReportAvailable} {...vprops('reporttoken')} />
 				</Field>
 
-				<Caption>External authentication</Caption>
+				<Caption>外部认证</Caption>
 				<Field>
-					<CheckboxInput label="Enable" enabled={extAuthAvailable} {...vprops('extauth')} />
+					<CheckboxInput label="开启" enabled={extAuthAvailable} {...vprops('extauth')} />
 				</Field>
-				<Field label="Validation key">
+				<Field label="验证密钥">
 					<TextInput long enabled={extAuthAvailable} {...vprops('extauthkey')} />
 				</Field>
-				<Field label="User group">
+				<Field label="社区组">
 					<TextInput enabled={extAuthAvailable} {...vprops('extauthgroup')} />
 				</Field>
 				<Field>
-					<CheckboxInput label="Permit guest logins when ext-auth server is unreachable" enabled={extAuthAvailable} {...vprops('extauthfallback')} />
-					<CheckboxInput label="Allow ext-auth moderators" enabled={extAuthAvailable} {...vprops('extauthmod')} />
-					<CheckboxInput label="Allow ext-auth hosts" enabled={extAuthAvailable} {...vprops('extauthhost')} />
-					<CheckboxInput label="Use ext-auth avatars" enabled={extAuthAvailable} {...vprops('extAuthAvatars')} />
+					<CheckboxInput label="当无法访问用户验证服务器时允许访客登录" enabled={extAuthAvailable} {...vprops('extauthfallback')} />
+					<CheckboxInput label="允许验证服务器验证管理员权限" enabled={extAuthAvailable} {...vprops('extauthmod')} />
+					<CheckboxInput label="允许验证服务器验证房间管理" enabled={extAuthAvailable} {...vprops('extauthhost')} />
+					<CheckboxInput label="使用验证服务器头像" enabled={extAuthAvailable} {...vprops('extAuthAvatars')} />
 				</Field>
 			</InputGrid>;
 		}
 
 		return <div className="content-box">
-			<h2>Settings</h2>
+			<h2>服务器设置</h2>
 			{this.state.error && <p className="alert-box">{this.state.error}</p>}
 			{inputGrid}
 		</div>;

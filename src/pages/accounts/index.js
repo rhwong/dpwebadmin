@@ -13,9 +13,9 @@ const AccountListTable = ({accounts, editAccountFunc, deleteAccountFunc}) => {
 	return <table className="table">
 		<thead>
 			<tr>
-				<th>Username</th>
-				<th>Status</th>
-				<th>Flags</th>
+				<th>用户名</th>
+				<th>状态</th>
+				<th>角色标志</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -25,8 +25,8 @@ const AccountListTable = ({accounts, editAccountFunc, deleteAccountFunc}) => {
 				<td>{a.locked && 'Locked'}</td>
 				<td>{a.flags}</td>
 				<td>
-					<button onClick={() => editAccountFunc(a)} className="small button">Edit</button>
-					<button onClick={() => deleteAccountFunc(a.id)} className="small danger button">Delete</button>
+					<button onClick={() => editAccountFunc(a)} className="small button">编辑</button>
+					<button onClick={() => deleteAccountFunc(a.id)} className="small danger button">删除</button>
 				</td>
 			</tr>)}
 		</tbody>
@@ -47,9 +47,9 @@ const EditAccountModal = ({title, user, closeFunc}) => {
 
 		let flags = [];
 		if(form.mod)
-			flags.push('MOD');
+			flags.push('版主');
 		if(form.host)
-			flags.push('HOST');
+			flags.push('房管');
 		flags = flags.join(',');
 
 		try {
@@ -85,21 +85,21 @@ const EditAccountModal = ({title, user, closeFunc}) => {
 		<h2>{title}</h2>
 		{form.error && <p className="alert-box">{form.error}</p>}
 		<InputGrid>
-			<Field label="Username">
+			<Field label="账户名称">
 				<TextInput {...vprops('username')} />
 			</Field>
-			<Field label="Password">
+			<Field label="密码">
 				<TextInput {...vprops('password')} />
 			</Field>
-			<Field label="Options">
-				<CheckboxInput label="Locked" {...vprops('locked')} />
-				<CheckboxInput label="Moderator" {...vprops('mod')} />
-				<CheckboxInput label="Can host" {...vprops('host')} />
+			<Field label="选项">
+				<CheckboxInput label="锁定" {...vprops('locked')} />
+				<CheckboxInput label="服务器管理员（版主）" {...vprops('mod')} />
+				<CheckboxInput label="可以创建会话" {...vprops('host')} />
 			</Field>
 		</InputGrid>
 		<p>
-			<button onClick={saveAccount} className="button">Save</button>
-			<button onClick={e => closeFunc(false)} className="button">Cancel</button>
+			<button onClick={saveAccount} className="button">保存</button>
+			<button onClick={e => closeFunc(false)} className="button">取消</button>
 		</p>
 		</>
 }
@@ -118,7 +118,7 @@ export default function() {
 
 	function addAccount() {
 		setEditing({
-			title: 'New account',
+			title: '创建新用户',
 			user: {
 				username: '',
 				password: '',
@@ -149,14 +149,14 @@ export default function() {
 	}
 
 	return <div className="content-box">
-		<h2>User accounts</h2>
+		<h2>账号管理</h2>
 		{error && <p className="alert-box">{error}</p>}
 		{accounts && <AccountListTable
 			accounts={accounts}
 			editAccountFunc={editAccount}
 			deleteAccountFunc={setConfirmDelete}
 			/>}
-		<p><button onClick={addAccount} className="button">Create</button></p>
+		<p><button onClick={addAccount} className="button">创建</button></p>
 		<Modal
 			isOpen={editing !== null}
 			onRequestClose={() => setEditing(null)}
@@ -175,10 +175,10 @@ export default function() {
 			isOpen={confirmDelete !== null}
 			onRequestClose={() => setConfirmDelete(null)}
 		>
-			<h2>Really delete?</h2>
+			<h2>真的删除吗?</h2>
 			<p>
-				<button onClick={removeAccount} className="danger button">Delete</button>
-				<button onClick={e => setConfirmDelete(null)} className="button">Cancel</button>
+				<button onClick={removeAccount} className="danger button">删除</button>
+				<button onClick={e => setConfirmDelete(null)} className="button">取消</button>
 			</p>
 		</Modal>
 	</div>

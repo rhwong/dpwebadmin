@@ -14,12 +14,12 @@ const WhitelistTable = ({whitelist, deleteFunc, updateFunc, addFunc}) => {
 			{whitelist.map((item, row) => <tr key={row}>
 				<td><input className="input-text long" type="input" value={item} onChange={e => updateFunc(e.target.value, row)} /></td>
 				<td>
-					<button onClick={() => deleteFunc(row)} className="small danger button">Delete</button>
+					<button onClick={() => deleteFunc(row)} className="small danger button">删除</button>
 				</td>
 			</tr>)}
 			<tr>
 				<td></td>
-				<td><button onClick={addFunc} className="small button">Add</button></td>
+				<td><button onClick={addFunc} className="small button">添加</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -69,7 +69,7 @@ export default function() {
 	}
 
 	return <div className="content-box">
-		<h2>List server URL whitelist</h2>
+		<h2>列表服务器白名单</h2>
 		{error && <p className="alert-box">{error.toString()}</p>}
 		{whitelist && <>
 			<WhitelistTable
@@ -83,12 +83,12 @@ export default function() {
 					checked={whitelist.enabled}
 					onChange={e => setWhitelist({...whitelist, enabled: e.target.checked})}
 					/>
-					<span>Use whitelist</span>
+					<span>启用白名单模式（开启后，房管将无法推送会话至除白名单以外的列表服务器）</span>
 				</label>
 			</p>
 		</>}
 
-		<p><button onClick={saveChanges} className="button">{saving ? "Saving..." : "Save changes"}</button></p>
+		<p><button onClick={saveChanges} className="button">{saving ? "Saving..." : "保存更改"}</button></p>
 	</div>
 }
 

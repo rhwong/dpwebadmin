@@ -6,12 +6,12 @@ const LogListTable = ({logs}) => {
 	return <table className="table">
 		<thead>
 			<tr>
-				<th>Time</th>
-				<th>Level</th>
-				<th>Topic</th>
-				<th>Session</th>
-				<th>User</th>
-				<th>Message</th>
+				<th>时间</th>
+				<th>等级</th>
+				<th>类型</th>
+				<th>会话</th>
+				<th>用户</th>
+				<th>信息</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,7 +38,7 @@ export default function() {
 	useEffect(fetchLogList, []);
 
 	return <div className="content-box">
-		<h2>Server logs</h2>
+		<h2>服务器日志</h2>
 		{error && <p className="alert-box">{error}</p>}
 		{logs && <LogListTable
 			logs={logs}

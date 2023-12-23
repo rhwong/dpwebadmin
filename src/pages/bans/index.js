@@ -13,10 +13,10 @@ const BanListTable = ({bans, deleteBanFunc}) => {
 	return <table className="table">
 		<thead>
 			<tr>
-				<th>Address</th>
-				<th>Expires</th>
-				<th>Added</th>
-				<th>Comment</th>
+				<th>IP地址</th>
+				<th>过期时间</th>
+				<th>添加日期</th>
+				<th>备注</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -27,7 +27,7 @@ const BanListTable = ({bans, deleteBanFunc}) => {
 				<td>{b.added}</td>
 				<td>{b.comment}</td>
 				<td>
-					<button onClick={() => deleteBanFunc(b.id)} className="small danger button">Delete</button>
+					<button onClick={() => deleteBanFunc(b.id)} className="small danger button">删除</button>
 				</td>
 			</tr>)}
 		</tbody>
@@ -61,25 +61,25 @@ const AddBanModal = ({closeFunc}) => {
 	}
 
 	return <>
-		<h2>Add a new ban</h2>
+		<h2>添加一个新的封禁记录</h2>
 		{error && <p className="alert-box">{error}</p>}
 		<InputGrid>
-			<Field label="Address">
+			<Field label="IP地址">
 				<TextInput {...vprops('ip')} />
 			</Field>
-			<Field label="Subnet mask">
+			<Field label="子网掩码">
 				<IntegerInput {...vprops('subnet')} />
 			</Field>
-			<Field label="Expires">
+			<Field label="过期时间">
 				<TextInput {...vprops('expires')} />
 			</Field>
-			<Field label="Comment">
+			<Field label="备注">
 				<TextInput long {...vprops('comment')} />
 			</Field>
 		</InputGrid>
 		<p>
-			<button onClick={saveBanEntry} className="button">Add</button>
-			<button onClick={e => closeFunc(false)} className="button">Cancel</button>
+			<button onClick={saveBanEntry} className="button">添加</button>
+			<button onClick={e => closeFunc(false)} className="button">取消</button>
 		</p>
 		</>
 }
@@ -102,13 +102,13 @@ export default function() {
 	}
 
 	return <div className="content-box">
-		<h2>IP bans</h2>
+		<h2>封禁记录</h2>
 		{error && <p className="alert-box">{error}</p>}
 		{bans && <BanListTable
 			bans={bans}
 			deleteBanFunc={setConfirmDelete}
 			/>}
-		<p><button onClick={e => setEditing(true)} className="button">Add</button></p>
+		<p><button onClick={e => setEditing(true)} className="button">添加</button></p>
 		<Modal
 			isOpen={editing}
 			onRequestClose={() => setEditing(null)}
@@ -125,10 +125,10 @@ export default function() {
 			isOpen={confirmDelete !== null}
 			onRequestClose={() => setConfirmDelete(null)}
 		>
-			<h2>Really delete?</h2>
+			<h2>确定要删除吗?</h2>
 			<p>
-				<button onClick={removeBan} className="danger button">Delete</button>
-				<button onClick={e => setConfirmDelete(null)} className="button">Cancel</button>
+				<button onClick={removeBan} className="danger button">删除</button>
+				<button onClick={e => setConfirmDelete(null)} className="button">取消</button>
 			</p>
 		</Modal>
 	</div>

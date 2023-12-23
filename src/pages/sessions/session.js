@@ -31,45 +31,45 @@ const MODAL_SMALL_STYLE = {
 const SessionInfo = ({session, openModal, vprops}) => {
 	return <div>
 		<InputGrid>
-			<Field label="Title">
+			<Field label="标题">
 				<TextInput long {...vprops('title')} />
 			</Field>
 			<Field label="ID">
 				<ReadOnly long value={session.id} />
 			</Field>
-			<Field label="Alias">
+			<Field label="别名">
 				<ReadOnly value={session.alias} />
 			</Field>
-			<Field label="Started by">
+			<Field label="创建人">
 				<ReadOnly value={session.founder} />
 			</Field>
-			<Field label="Started at">
+			<Field label="创建时间">
 				<ReadOnly value={session.startTime} />
 			</Field>
-			<Field label="Size">
+			<Field label="大小">
 				<ReadOnly value={(session.size / (1024*1024)).toFixed(2) + " MB"} />
 				/
 				<ReadOnly value={(session.maxSize / (1024*1024)).toFixed(2) + " MB"} />
 			</Field>
-			<Field label="Autoreset threshold">
+			<Field label="自动重置限制大小">
 				<TextInput {...vprops('resetThreshold')} />
 			</Field>
-			<Field label="Users">
+			<Field label="用户数量">
 				<ReadOnly value={session.userCount} />
 				/
 				<IntegerInput {...vprops('maxUserCount')} />
 			</Field>
 			<Field>
-				<CheckboxInput label="Closed to new users" {...vprops('closed')} />
-				<CheckboxInput label="Registered users only" {...vprops('authOnly')} />
-				<CheckboxInput label="Persists without users" {...vprops('persistent')} />
-				<CheckboxInput label="NSFW" {...vprops('nsfm')} />
+				<CheckboxInput label="禁止新用户加入" {...vprops('closed')} />
+				<CheckboxInput label="仅允许已注册用户加入" {...vprops('authOnly')} />
+				<CheckboxInput label="无用户时保持开启" {...vprops('persistent')} />
+				<CheckboxInput label="未成年人禁入标识(NSFW)" {...vprops('nsfm')} />
 			</Field>
 		</InputGrid>
 		<p>
-			<button onClick={e => openModal('setPassword')} className="button">{session.hasPassword ? "Change" : "Set"} password</button>
-			<button onClick={e => openModal('setOpword')} className="button">{session.hasOpword ? "Change" : "Set"} opword</button>
-			<button onClick={e => openModal('terminate')} className="danger button">Terminate</button>
+			<button onClick={e => openModal('setPassword')} className="button">{session.hasPassword ? "修改" : "设置"} 房间密码</button>
+			<button onClick={e => openModal('setOpword')} className="button">{session.hasOpword ? "修改" : "设置"} 房管权限密码</button>
+			<button onClick={e => openModal('terminate')} className="danger button">终止会话</button>
 		</p>
 	</div>
 }
@@ -80,15 +80,15 @@ const UserListBox = ({sessionId, users, openModal}) => {
 	}
 
 	return <div className="content-box">
-		<h3>Users</h3>
+		<h3>用户列表</h3>
 		<table className="table">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Name</th>
+					<th>名称</th>
 					<th>IP</th>
-					<th>Flags</th>
-					<th>Status</th>
+					<th>身份标识</th>
+					<th>状态</th>
 					<th></th>
 				</tr>
                 </thead>
@@ -97,33 +97,33 @@ const UserListBox = ({sessionId, users, openModal}) => {
 						<td>{u.id}</td>
 						<td>{u.name}</td>
 						<td>{u.ip}</td>
-						<td>{u.muted && "Muted"} {u.mod && "MOD"} {u.op && "Op"}</td>
-						<td>{u.online ? "online" : "offline"}</td>
+						<td>{u.muted && "Muted"} {u.mod && "版主"} {u.op && "房管"}</td>
+						<td>{u.online ? "在线" : "离线"}</td>
 						<td>{u.online && <>
-							{!u.mod && <button onClick={() => changeUserOp(u)} className="small button">{u.op ? "De-op" : "Op"}</button>}
-							<button onClick={() => openModal('message', {userName: u.name, userId: u.id})} className="small button">Message</button>
-							<button onClick={() => openModal('kick', {userName: u.name, userId: u.id})} className="small danger button">Kick</button>
+							{!u.mod && <button onClick={() => changeUserOp(u)} className="small button">{u.op ? "取消房管" : "设置房管"}</button>}
+							<button onClick={() => openModal('message', {userName: u.name, userId: u.id})} className="small button">发送信息</button>
+							<button onClick={() => openModal('kick', {userName: u.name, userId: u.id})} className="small danger button">踢出</button>
 							</>}
 						</td>
 					</tr>)}
                 </tbody>
         </table>
 		<p>
-			<button onClick={() => openModal('message')} className="button">Message all</button>
+			<button onClick={() => openModal('message')} className="button">广播信息</button>
 		</p>
 	</div>
 }
 
 const ListingsBox = ({listings}) => {
 	return <div className="content-box">
-		<h3>Listings</h3>
+		<h3>已推送的列表服务器</h3>
 		<table className="table">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>URL</th>
-					<th>Code</th>
-					<th>Type</th>
+					<th>地址</th>
+					<th>编码</th>
+					<th>类型</th>
 					<th></th>
 				</tr>
                 </thead>
@@ -132,9 +132,9 @@ const ListingsBox = ({listings}) => {
 						<td>{l.id}</td>
 						<td>{l.url}</td>
 						<td>{l.roomcode}</td>
-						<td>{l.private ? "Private" : "Public"}</td>
+						<td>{l.private ? "私有" : "公开"}</td>
 						<td>
-							<button className="small danger button">Unlist</button>
+							<button className="small danger button">取消推送</button>
 						</td>
 					</tr>)}
                 </tbody>
@@ -243,7 +243,7 @@ export class SessionPage extends React.Component {
 
 		return <>
 			<div className="content-box">
-				<h2>Session</h2>
+				<h2>会话</h2>
 				{error && <p className="alert-box">{error}</p>}
 				{session && <SessionInfo session={session} openModal={this.openModal} vprops={vprops} />}
 			</div>

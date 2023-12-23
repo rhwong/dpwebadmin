@@ -30,15 +30,15 @@ export default class extends React.Component {
 		let content = null;
 		if(status) {
 			content = <>
-				<p>Server started at {status.started}</p>
-				<p>Address: {status.ext_host}{status.ext_port !== 27750 ? `:${status.ext_port}` : ''}</p>
-				<p>Sessions: {status.sessions} / {status.maxSessions}</p>
-				<p>Users: {status.users}</p>
+				<p>服务器开启于 {status.started}</p>
+				<p>地址: {status.ext_host}{status.ext_port !== 27750 ? `:${status.ext_port}` : ''}</p>
+				<p>会话数量: {status.sessions} / {status.maxSessions}</p>
+				<p>用户数量: {status.users}</p>
 				</>;
 		}
 
 		return <div className="content-box">
-			<h2>Status</h2>
+			<h2>状态</h2>
 			{error && <p className="alert-box">{error}</p>}
 			{content}
 			</div>

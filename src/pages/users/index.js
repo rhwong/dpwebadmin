@@ -7,11 +7,11 @@ const UserListTable = ({users}) => {
 	return <table className="table">
 		<thead>
 			<tr>
-				<th>Username</th>
+				<th>用户名称</th>
 				<th>ID</th>
-				<th>Session</th>
+				<th>会话</th>
 				<th>IP</th>
-				<th>Features</th>
+				<th>用户角色</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,7 +51,7 @@ export default class extends React.Component {
 	render() {
 		const { users, error } = this.state;
 		return <div className="content-box">
-			<h2>Users</h2>
+			<h2>用户列表</h2>
 			{error && <p className="alert-box">{error}</p>}
 			{users && <UserListTable users={users} />}
 		</div>

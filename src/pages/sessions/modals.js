@@ -18,7 +18,7 @@ const OkButton = ({label, func, children}) => {
 	return <button onClick={clickHandler} className="danger button">{label}</button>
 }
 
-const CancelButton = ({label="Cancel"}) => {
+const CancelButton = ({label="取消"}) => {
 	const ctx = useContext(ModalContext);
 	return <button onClick={e => ctx.closeFunc()} className="button">{label}</button>
 }
@@ -34,14 +34,14 @@ function SetPasswordModal({targetSetting, title}) {
 	}
 
 	return <>
-		<ModalHeader>Set session {title}</ModalHeader>
+		<ModalHeader>设置会话 {title}</ModalHeader>
 		<input
 			type="password" 
 			className="input-text"
 			onChange={e => setPasswd(e.target.value)}
 			/>
 		<ModalButtons>
-			<OkButton func={setPassword} label="Set" />
+			<OkButton func={setPassword} label="设置" />
 			<CancelButton />
 		</ModalButtons>
 		</>
@@ -57,10 +57,10 @@ function TerminateSessionModal() {
 	}
 
 	return <>
-		<ModalHeader>Terminate session</ModalHeader>
-		<p>Really terminate session?</p>
+		<ModalHeader>终止会话</ModalHeader>
+		<p>真的终止会话吗?</p>
 		<ModalButtons>
-			<OkButton func={terminate} label="Terminate" />
+			<OkButton func={terminate} label="确定终止" />
 			<CancelButton />
 		</ModalButtons>
 		</>
@@ -74,10 +74,10 @@ function KickUserModal() {
 	}
 
 	return <>
-		<ModalHeader>Kick user</ModalHeader>
-		<p>Really kick {ctx.userName}?</p>
+		<ModalHeader>踢出用户</ModalHeader>
+		<p>真的踢出 {ctx.userName} 吗?</p>
 		<ModalButtons>
-			<OkButton func={kick} label="Kick" />
+			<OkButton func={kick} label="确定踢出" />
 			<CancelButton />
 		</ModalButtons>
 		</>
@@ -96,7 +96,7 @@ function MessageModal() {
 	}
 
 	return <>
-		<ModalHeader>Message {ctx.userName || "everyone"}</ModalHeader>
+		<ModalHeader>发送消息给 {ctx.userName || "所有人"}</ModalHeader>
 		<input
 			type="text" 
 			className="input-text"
@@ -104,7 +104,7 @@ function MessageModal() {
 			onChange={e => setMessage(e.target.value)}
 			/>
 		<ModalButtons>
-			<OkButton func={sendMessage} label="Send" />
+			<OkButton func={sendMessage} label="发送" />
 			<CancelButton />
 		</ModalButtons>
 		</>
@@ -113,8 +113,8 @@ function MessageModal() {
 export function ModalContent({modal, closeFunc}) {
 	let m;
 	switch(modal.active) {
-	case 'setPassword': m = <SetPasswordModal targetSetting='password' title="password" />; break;
-	case 'setOpword': m = <SetPasswordModal targetSetting='opword' title="opword" />; break;
+	case 'setPassword': m = <SetPasswordModal targetSetting='password' title="密码" />; break;
+	case 'setOpword': m = <SetPasswordModal targetSetting='opword' title="房管密码" />; break;
 	case 'terminate': m = <TerminateSessionModal />; break;
 	case 'message': m = <MessageModal />; break;
 	case 'kick': m = <KickUserModal />; break;

@@ -12,13 +12,13 @@ const SessionTable = ({sessions}) => {
 	return <table className="table">
 		<thead>
 			<tr>
-				<th>Title</th>
+				<th>标题</th>
 				<th>ID</th>
-				<th>Alias</th>
-				<th>Users</th>
-				<th>Options</th>
-				<th>Size</th>
-				<th>Uptime</th>
+				<th>别名</th>
+				<th>用户数量</th>
+				<th>选项</th>
+				<th>大小</th>
+				<th>创建时间</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -60,7 +60,7 @@ export class SessionListPage extends React.Component {
 	render() {
 		const { sessions, error } = this.state;
 		return <div className="content-box">
-			<h2>Sessions</h2>
+			<h2>会话列表</h2>
 			{error && <p className="alert-box">{error}</p>}
 			{sessions && <SessionTable sessions={sessions} />}
 		</div>
